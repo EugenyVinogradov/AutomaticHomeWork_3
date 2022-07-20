@@ -42,7 +42,7 @@ public class TestOrderingForCard {
         void shouldSubmitRequestByPhoneContainsAllZero() {
             open("http://localhost:9999");
             SelenideElement form = $("form");
-            form.$("[data-test-id=name] input").setValue("Василий Алибабаевич Алибабаев-Задунайский Z");
+            form.$("[data-test-id=name] input").setValue("Василий Алибабаевич Алибабаев-Задунайский");
             form.$("[data-test-id=phone] input").setValue("+00000000000");
             form.$("[data-test-id=agreement]").click();
             form.$("[type=button]").click();
