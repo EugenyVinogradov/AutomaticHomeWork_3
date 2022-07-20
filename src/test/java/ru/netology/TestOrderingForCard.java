@@ -18,4 +18,34 @@ public class TestOrderingForCard {
             form.$("[type=button]").click();
             $("[data-test-id=order-success]").shouldHave(exactText("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
         }
+        @Test
+        void shouldSubmitRequestByNameContainsSpace() {
+            open("http://localhost:9999");
+            SelenideElement form = $("form");
+            form.$("[data-test-id=name] input").setValue("Василий Алибабаевич");
+            form.$("[data-test-id=phone] input").setValue("+79270000000");
+            form.$("[data-test-id=agreement]").click();
+            form.$("[type=button]").click();
+            $("[data-test-id=order-success]").shouldHave(exactText("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+        }
+        @Test
+        void shouldSubmitRequestByNameContainsSpaceAndHyphen() {
+            open("http://localhost:9999");
+            SelenideElement form = $("form");
+            form.$("[data-test-id=name] input").setValue("Василий Алибабаевич Алибабаев-Задунайский");
+            form.$("[data-test-id=phone] input").setValue("+79270000000");
+            form.$("[data-test-id=agreement]").click();
+            form.$("[type=button]").click();
+            $("[data-test-id=order-success]").shouldHave(exactText("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+        }
+        @Test
+        void shouldSubmitRequestByPhoneContainsAllZero() {
+            open("http://localhost:9999");
+            SelenideElement form = $("form");
+            form.$("[data-test-id=name] input").setValue("Василий Алибабаевич Алибабаев-Задунайский");
+            form.$("[data-test-id=phone] input").setValue("+00000000000");
+            form.$("[data-test-id=agreement]").click();
+            form.$("[type=button]").click();
+            $("[data-test-id=order-success]").shouldHave(exactText("  Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+        }
 }
